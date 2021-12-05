@@ -3,6 +3,8 @@ import Search from "./component//Search/Search";
 import styles from "./App.module.scss";
 import WeatherAbout from "./component/WeatherAbout/WeatherAbout";
 import Map from "./component/Map/Map";
+import GraphTem from "./component/GraphTem/GraphTem";
+import Forecast from "./component/Forecast/Forecast";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +19,14 @@ const App: React.FC = () => {
           </div>
           <div className={styles.mapWrapper}>
             <Map />
+          </div>
+        </div>
+        <div className={styles.bottomWrapper}>
+          <div className={styles.GraphTemWrapper}>
+            <GraphTem />
+          </div>
+          <div className={styles.forecastWrapper}>
+            <Forecast />
           </div>
         </div>
       </div>

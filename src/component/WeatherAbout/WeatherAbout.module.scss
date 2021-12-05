@@ -1,5 +1,17 @@
 .root {
-  width: 30vh;
+  width: 30vw;
   height: 40vh;
-  text-align: center;
+  background-color: red;
+  .time {
+    color: orange;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .time > p {
+    margin: 0;
+  }
+  .place {
+    color: black;
+    font-size: 24px;
+  }
 }
