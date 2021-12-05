@@ -1,6 +1,8 @@
 import React from "react";
-import Search from "./component//Search";
+import Search from "./component//Search/Search";
 import styles from "./App.module.scss";
+import WeatherAbout from "./component/WeatherAbout/WeatherAbout";
+import Map from "./component/Map/Map";
 
 const App: React.FC = () => {
   return (
@@ -8,6 +10,14 @@ const App: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.serachWrapper}>
           <Search />
+        </div>
+        <div className={styles.mainWrapper}>
+          <div className={styles.weatherAboutWrapper}>
+            <WeatherAbout />
+          </div>
+          <div className={styles.mapWrapper}>
+            <Map />
+          </div>
         </div>
       </div>
     </div>

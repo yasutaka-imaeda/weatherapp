@@ -20,8 +20,6 @@ const Search: React.FC = () => {
                 }}
                 noValidate
                 autoComplete="off"
-                fontSize="14px"
-                // height="24px"
               >
                 <TextField
                   id="outlined-basic"
