@@ -1,11 +1,57 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import styles from "./Search.module.scss";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 const Search: React.FC = () => {
+  const ApiKey = "3c05d3de91a0a2b64dd64cd68e18e38e";
+  const City = "Tokyo";
+
+  // const params = {
+  //   appid: ApiKey,
+  //   q: City,
+  // };
+  // const Url = `http://api.openweathermap.org/data/2.5/forecast`;
+
+  const [datas, setDatas] = useState([]);
+
+  const SearchWeather = async (city: any) => {
+    try {
+      const params = {
+        key: ApiKey,
+        q: city,
+      };
+      // const response = await axios.get(Url, { params });
+      const response = await axios.get(
+        `http://api.openweathermap.org/data/2.5/weather?q=${City}&appid=${ApiKey}`
+      );
+      setDatas(response.data.weather);
+      if (response.data.total === 0) {
+        window.alert("お探しの都市はありません");
+      }
+    } catch {
+      window.alert("天気の取得に失敗しました。");
+    }
+  };
+
+  // console.log("これが結果です");
+  // console.log({ response });
+  // console.log("これが結果のタイプです");
+  // console.log(typeof response);
+  // console.log(Object.values(response));
+  // console.log(Object.keys(response).length);
+  console.log("これが結果です");
+  console.log(datas);
+  console.log("これが結果のタイプです");
+  console.log(typeof datas);
+  console.log("これが結果の長さ");
+  console.log(Object.keys(datas).length);
+  console.log("これが取得対象の都市です");
+  // console.log(datas.weather);
+
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -30,7 +76,9 @@ const Search: React.FC = () => {
             </div>
             <div className={styles.SearchBtn}>
               <Stack spacing={2} direction="row" height="52px">
-                <Button variant="contained">検索</Button>
+                <Button variant="contained" onClick={SearchWeather}>
+                  検索
+                </Button>
               </Stack>
             </div>
           </form>

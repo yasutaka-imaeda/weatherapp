@@ -1,8 +1,8 @@
 import React from "react";
-import Search from "./component//Search/Search";
+import Search from "./component/Search/Search";
 import styles from "./App.module.scss";
 import WeatherAbout from "./component/WeatherAbout/WeatherAbout";
-import Map from "./component/Map/Map";
+import Maps from "./component/Map/Map";
 import GraphTem from "./component/GraphTem/GraphTem";
 import Forecast from "./component/Forecast/Forecast";
 
@@ -18,7 +18,7 @@ const App: React.FC = () => {
             <WeatherAbout />
           </div>
           <div className={styles.mapWrapper}>
-            <Map />
+            <Maps />
           </div>
         </div>
         <div className={styles.bottomWrapper}>
