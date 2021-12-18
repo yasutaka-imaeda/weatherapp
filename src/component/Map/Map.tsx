@@ -4,7 +4,8 @@ import GoogleMapReact from "google-map-react";
 import styles from "./Map.module.scss";
 
 const Maps: React.FC = () => {
-  const GoogleMap_APIKEY = "AIzaSyCYy0RJ4yRHA0MkyVxoZKIcesUm9aQRaoM";
+  const GoogleMap_APIKEY = process.env.REACT_APP_GOOGLEMAP_APIKEY;
+  console.log(GoogleMap_APIKEY);
   const defaultLatLng = {
     lat: 35.7022589,
     lng: 139.7744733,

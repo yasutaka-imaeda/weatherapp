@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 
 const Search: React.FC = () => {
-  const ApiKey = "3c05d3de91a0a2b64dd64cd68e18e38e";
+  const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
   const City = "Tokyo";
 
   // const params = {
@@ -20,10 +20,10 @@ const Search: React.FC = () => {
 
   const SearchWeather = async (city: any) => {
     try {
-      const params = {
-        key: ApiKey,
-        q: city,
-      };
+      // const params = {
+      //   key: ApiKey,
+      //   q: city,
+      // };
       // const response = await axios.get(Url, { params });
       const response = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?q=${City}&appid=${ApiKey}`
