@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+// import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+// import Box from "@mui/material/Box";
+// import TextField from "@mui/material/TextField";
 import styles from "./Search.module.scss";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import {
+  selectCity,
+  registerCity,
+  registerCityName,
+  selectCityName,
+} from "../../app/taskSlice";
 
 const Search: React.FC = () => {
-  const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
-  const City = "Tokyo";
+  const dispatch = useAppDispatch();
+
+  // const City = "Tokyo";
 
   // const params = {
   //   appid: ApiKey,
@@ -17,18 +26,25 @@ const Search: React.FC = () => {
   // const Url = `http://api.openweathermap.org/data/2.5/forecast`;
 
   const [datas, setDatas] = useState([]);
+  const [cityName, setCityName] = useState([]);
 
-  const SearchWeather = async (city: any) => {
+  const changeName = (event: any) => {
+    setCityName(event.target.value);
+    // console.log(cityName);
+  };
+
+  const onSearchSubmit = async () => {
     try {
-      // const params = {
-      //   key: ApiKey,
-      //   q: city,
-      // };
-      // const response = await axios.get(Url, { params });
+      const ApiKey = "3c05d3de91a0a2b64dd64cd68e18e38e";
+      // const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
+      const city = cityName;
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${City}&appid=${ApiKey}`
+        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
       );
-      setDatas(response.data.weather);
+      setDatas(response.data.name);
+      const sendData = { name: datas, longitude: 36.0, latitude: 140.0 };
+      dispatch(registerCity(sendData));
+      // dispatch(registerCityName("nagasaki"));
       if (response.data.total === 0) {
         window.alert("お探しの都市はありません");
       }
@@ -37,28 +53,48 @@ const Search: React.FC = () => {
     }
   };
 
-  // console.log("これが結果です");
-  // console.log({ response });
-  // console.log("これが結果のタイプです");
-  // console.log(typeof response);
-  // console.log(Object.values(response));
-  // console.log(Object.keys(response).length);
+  // const SearchWeather = async (city: any) => {
+  //   try {
+  //     // const params = {
+  //     //   key: ApiKey,
+  //     //   q: city,
+  //     // };
+  //     // const response = await axios.get(Url, { params });
+  //     const response = await axios.get(
+  //       `http://api.openweathermap.org/data/2.5/weather?q=${City}&appid=${ApiKey}`
+  //     );
+  //     setDatas(response.data.name);
+  //     if (response.data.total === 0) {
+  //       window.alert("お探しの都市はありません");
+  //     }
+  //   } catch {
+  //     window.alert("天気の取得に失敗しました。");
+  //   }
+  // };
+
   console.log("これが結果です");
   console.log(datas);
   console.log("これが結果のタイプです");
   console.log(typeof datas);
   console.log("これが結果の長さ");
   console.log(Object.keys(datas).length);
-  console.log("これが取得対象の都市です");
-  // console.log(datas.weather);
+  // console.log({ CityInfo });
 
   return (
     <div className={styles.root}>
       <div className={styles.container}>
         <div className={styles.searchTitle}>都市名</div>
         <div className={styles.form}>
-          <form className={styles.form}>
-            <div className={styles.SearchBox}>
+          <div className={styles.form}>
+            <input
+              type="text"
+              placeholder="検索する都市の名前"
+              id="inputCity"
+              onChange={changeName}
+            />
+            <input type="submit" value="検索" onClick={onSearchSubmit} />
+            {/* <div>{datas}</div> */}
+            {/* <div className={styles.SearchBox}>
               <Box
                 component="form"
                 sx={{
@@ -66,22 +102,22 @@ const Search: React.FC = () => {
                 }}
                 noValidate
                 autoComplete="off"
+                onSubmit={onSearchSubmit}
               >
                 <TextField
                   id="outlined-basic"
                   label="都市名を検索"
                   variant="outlined"
+                  onSubmit={onSearchSubmit}
                 />
               </Box>
             </div>
             <div className={styles.SearchBtn}>
               <Stack spacing={2} direction="row" height="52px">
-                <Button variant="contained" onClick={SearchWeather}>
-                  検索
-                </Button>
+                <Button variant="contained">検索</Button>
               </Stack>
-            </div>
-          </form>
+            </div> */}
+          </div>
         </div>
       </div>
     </div>
