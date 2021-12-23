@@ -49,6 +49,8 @@ const Search: React.FC = () => {
         weatherdis: response.data.weather[0].description,
         icon: response.data.weather[0].icon,
         temp: response.data.main.temp - 273.15,
+        windspeed: response.data.wind.speed,
+        windowdeg: response.data.wind.deg,
       };
       dispatch(searchWeather(weatherData));
       console.log(response);

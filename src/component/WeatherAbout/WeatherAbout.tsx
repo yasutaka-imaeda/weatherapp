@@ -21,6 +21,27 @@ const WeatherAbout: React.FC = () => {
   const icon = weatherinfo.icon;
   const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   const temp = Math.floor(weatherinfo.temp * 10) / 10;
+  const deg = weatherinfo.windowdeg;
+  const dname = [
+    "北",
+    "北北東",
+    "北東",
+    "東北東",
+    "東",
+    "東南東",
+    "南東",
+    "南南東",
+    "南",
+    "南南西",
+    "南西",
+    "西南西",
+    "西",
+    "西北西",
+    "北西",
+    "北北西",
+    "北",
+  ];
+  const dindex = Math.floor(deg / 22.5);
 
   return (
     <div className={styles.root}>
@@ -31,10 +52,14 @@ const WeatherAbout: React.FC = () => {
         <p>現在時刻</p>
       </div>
       <div className={styles.place}>{CityName}</div>
-      <div className={styles.place}>天気：{weatherinfo.weather}</div>
-      <div className={styles.place}>詳細：{weatherinfo.weatherdis}</div>
+      <div className={styles.place}>
+        天気：{weatherinfo.weather}（{weatherinfo.weatherdis}）
+      </div>
+      {/* <div className={styles.place}>詳細：{weatherinfo.weatherdis}</div> */}
       <img src={iconUrl} />
       <div className={styles.place}>気温：{temp}℃</div>
+      <div className={styles.place}>風速：{weatherinfo.windspeed}m/s</div>
+      <div className={styles.place}>風向き：{dname[dindex]}</div>
     </div>
   );
 };

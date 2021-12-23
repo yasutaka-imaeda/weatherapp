@@ -4,13 +4,27 @@ import { RootState, AppThunk } from "../app/store";
 
 export interface TaskState {
   city: { name: string; longitude: number; latitude: number };
-  weather: { weather: string; weatherdis: string; icon: string; temp: number };
+  weather: {
+    weather: string;
+    weatherdis: string;
+    icon: string;
+    temp: number;
+    windspeed: number;
+    windowdeg: number;
+  };
   cityName: string;
 }
 
 const initialState: TaskState = {
   city: { name: "tokyo", longitude: 36.0, latitude: 140.0 },
-  weather: { weather: "", weatherdis: "", icon: "", temp: 0 },
+  weather: {
+    weather: "",
+    weatherdis: "",
+    icon: "",
+    temp: 0,
+    windspeed: 0,
+    windowdeg: 0,
+  },
   cityName: "",
 };
 
