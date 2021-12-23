@@ -9,6 +9,8 @@ export interface TaskState {
     weatherdis: string;
     icon: string;
     temp: number;
+    pressure: number;
+    humidity: number;
     windspeed: number;
     windowdeg: number;
   };
@@ -20,12 +22,14 @@ const initialState: TaskState = {
   weather: {
     weather: "",
     weatherdis: "",
-    icon: "",
+    icon: "01d",
     temp: 0,
+    pressure: 0,
+    humidity: 0,
     windspeed: 0,
     windowdeg: 0,
   },
-  cityName: "",
+  cityName: "tokyo",
 };
 
 export const taskSlice = createSlice({

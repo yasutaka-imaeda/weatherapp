@@ -58,8 +58,12 @@ const WeatherAbout: React.FC = () => {
       {/* <div className={styles.place}>詳細：{weatherinfo.weatherdis}</div> */}
       <img src={iconUrl} />
       <div className={styles.place}>気温：{temp}℃</div>
-      <div className={styles.place}>風速：{weatherinfo.windspeed}m/s</div>
-      <div className={styles.place}>風向き：{dname[dindex]}</div>
+      <div className={styles.place}>気圧：{weatherinfo.pressure}hPa</div>
+      <div className={styles.place}>湿度：{weatherinfo.humidity}％</div>
+      <div className={styles.place}>
+        風速：{weatherinfo.windspeed}m/s（{dname[dindex]}）
+      </div>
+      {/* <div className={styles.place}>風向き：{dname[dindex]}</div> */}
     </div>
   );
 };
