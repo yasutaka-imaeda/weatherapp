@@ -4,14 +4,14 @@ import { RootState, AppThunk } from "../app/store";
 
 export interface TaskState {
   city: { name: string; longitude: number; latitude: number };
-  weather: { weather: string; icon: string };
+  weather: { weather: string; weatherdis: string; icon: string; temp: number };
   cityName: string;
 }
 
 const initialState: TaskState = {
   city: { name: "tokyo", longitude: 36.0, latitude: 140.0 },
-  weather: { weather: "sunny", icon: "test" },
-  cityName: "akihabara",
+  weather: { weather: "", weatherdis: "", icon: "", temp: 0 },
+  cityName: "",
 };
 
 export const taskSlice = createSlice({
@@ -38,7 +38,7 @@ export const selectCityName = (state: RootState): TaskState["cityName"] =>
   state.task.cityName;
 export const selectCity = (state: RootState): TaskState["city"] =>
   state.task.city;
-export const selectIsModalOpen = (state: RootState): TaskState["weather"] =>
+export const selectWeather = (state: RootState): TaskState["weather"] =>
   state.task.weather;
 
 export default taskSlice.reducer;

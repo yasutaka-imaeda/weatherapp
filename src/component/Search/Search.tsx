@@ -12,6 +12,8 @@ import {
   registerCity,
   registerCityName,
   selectCityName,
+  searchWeather,
+  selectWeather,
 } from "../../app/taskSlice";
 
 const Search: React.FC = () => {
@@ -25,60 +27,39 @@ const Search: React.FC = () => {
   // };
   // const Url = `http://api.openweathermap.org/data/2.5/forecast`;
 
-  const [datas, setDatas] = useState([]);
-  const [cityName, setCityName] = useState([]);
-
-  const changeName = (event: any) => {
-    setCityName(event.target.value);
-    // console.log(cityName);
-  };
-
   const onSearchSubmit = async () => {
+    const inputElement: any = document.getElementById("inputCity");
+    const inputCityName = inputElement ? inputElement.value : "";
     try {
       const ApiKey = "3c05d3de91a0a2b64dd64cd68e18e38e";
       // const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
-      const city = cityName;
+      const city = inputCityName;
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
+        `http://api.openweathermap.org/data/2.5/weather?q=${city},jp&lang=ja&appid=${ApiKey}`
       );
-      setDatas(response.data.name);
-      const sendData = { name: datas, longitude: 36.0, latitude: 140.0 };
-      dispatch(registerCity(sendData));
-      // dispatch(registerCityName("nagasaki"));
+      dispatch(registerCityName(response.data.name));
+      const cityData = {
+        name: response.data.name,
+        longitude: response.data.coord.lon,
+        latitude: response.data.coord.lat,
+      };
+      dispatch(registerCity(cityData));
+      const weatherData = {
+        weather: response.data.weather[0].main,
+        weatherdis: response.data.weather[0].description,
+        icon: response.data.weather[0].icon,
+        temp: response.data.main.temp - 273.15,
+      };
+      dispatch(searchWeather(weatherData));
+      console.log(response);
       if (response.data.total === 0) {
         window.alert("お探しの都市はありません");
       }
     } catch {
       window.alert("天気の取得に失敗しました。");
     }
+    inputElement.value = "";
   };
-
-  // const SearchWeather = async (city: any) => {
-  //   try {
-  //     // const params = {
-  //     //   key: ApiKey,
-  //     //   q: city,
-  //     // };
-  //     // const response = await axios.get(Url, { params });
-  //     const response = await axios.get(
-  //       `http://api.openweathermap.org/data/2.5/weather?q=${City}&appid=${ApiKey}`
-  //     );
-  //     setDatas(response.data.name);
-  //     if (response.data.total === 0) {
-  //       window.alert("お探しの都市はありません");
-  //     }
-  //   } catch {
-  //     window.alert("天気の取得に失敗しました。");
-  //   }
-  // };
-
-  console.log("これが結果です");
-  console.log(datas);
-  console.log("これが結果のタイプです");
-  console.log(typeof datas);
-  console.log("これが結果の長さ");
-  console.log(Object.keys(datas).length);
-  // console.log({ CityInfo });
 
   return (
     <div className={styles.root}>
@@ -90,7 +71,7 @@ const Search: React.FC = () => {
               type="text"
               placeholder="検索する都市の名前"
               id="inputCity"
-              onChange={changeName}
+              // onInput={changeName}
             />
             <input type="submit" value="検索" onClick={onSearchSubmit} />
             {/* <div>{datas}</div> */}
