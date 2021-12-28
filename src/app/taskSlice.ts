@@ -18,7 +18,7 @@ export interface TaskState {
 }
 
 const initialState: TaskState = {
-  city: { name: "tokyo", longitude: 36.0, latitude: 140.0 },
+  city: { name: "tokyo", longitude: 140.0, latitude: 36.0 },
   weather: {
     weather: "",
     weatherdis: "",

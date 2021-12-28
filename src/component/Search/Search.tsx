@@ -35,7 +35,7 @@ const Search: React.FC = () => {
       // const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
       const city = inputCityName;
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city},jp&lang=ja&appid=${ApiKey}`
+        `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ja&appid=${ApiKey}`
       );
       dispatch(registerCityName(response.data.name));
       const cityData = {
@@ -56,6 +56,10 @@ const Search: React.FC = () => {
       };
       dispatch(searchWeather(weatherData));
       console.log(response);
+      const responseHD = await axios.get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude={hourly,daily}&appid=${ApiKey}`
+      );
+      console.log(responseHD);
       if (response.data.total === 0) {
         window.alert("お探しの都市はありません");
       }
