@@ -15,6 +15,16 @@ export interface TaskState {
     windowdeg: number;
   };
   cityName: string;
+  forecast: [
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number },
+    { icon: string; mintemp: number; maxtemp: number }
+  ];
 }
 
 const initialState: TaskState = {
@@ -30,6 +40,16 @@ const initialState: TaskState = {
     windowdeg: 0,
   },
   cityName: "tokyo",
+  forecast: [
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+    { icon: "01d", mintemp: 0, maxtemp: 0 },
+  ],
 };
 
 export const taskSlice = createSlice({
@@ -46,11 +66,18 @@ export const taskSlice = createSlice({
     searchWeather: (state, action) => {
       state.weather = action.payload;
     },
+    registerForecast: (state, action) => {
+      state.forecast = action.payload;
+    },
   },
 });
 
-export const { registerCity, registerCityName, searchWeather } =
-  taskSlice.actions;
+export const {
+  registerCity,
+  registerCityName,
+  searchWeather,
+  registerForecast,
+} = taskSlice.actions;
 
 export const selectCityName = (state: RootState): TaskState["cityName"] =>
   state.task.cityName;
@@ -58,5 +85,7 @@ export const selectCity = (state: RootState): TaskState["city"] =>
   state.task.city;
 export const selectWeather = (state: RootState): TaskState["weather"] =>
   state.task.weather;
+export const selectForecast = (state: RootState): TaskState["forecast"] =>
+  state.task.forecast;
 
 export default taskSlice.reducer;

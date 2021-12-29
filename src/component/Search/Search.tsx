@@ -14,6 +14,7 @@ import {
   selectCityName,
   searchWeather,
   selectWeather,
+  registerForecast,
 } from "../../app/taskSlice";
 
 const Search: React.FC = () => {
@@ -55,11 +56,58 @@ const Search: React.FC = () => {
         windowdeg: response.data.wind.deg,
       };
       dispatch(searchWeather(weatherData));
-      console.log(response);
       const responseHD = await axios.get(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude={hourly,daily}&appid=${ApiKey}`
       );
-      console.log(responseHD);
+      // console.log(responseHD);
+      // console.log(responseHD.data.daily);
+      // console.log(responseHD.data.daily[0].weather[0].icon);
+      // console.log(responseHD.data.daily[0].temp.min);
+      // console.log(responseHD.data.daily[0].temp.max);
+      const forecastdata = [
+        {
+          icon: responseHD.data.daily[0].weather[0].icon,
+          mintemp: responseHD.data.daily[0].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[0].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[1].weather[0].icon,
+          mintemp: responseHD.data.daily[1].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[1].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[2].weather[0].icon,
+          mintemp: responseHD.data.daily[2].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[2].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[3].weather[0].icon,
+          mintemp: responseHD.data.daily[3].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[3].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[4].weather[0].icon,
+          mintemp: responseHD.data.daily[4].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[4].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[5].weather[0].icon,
+          mintemp: responseHD.data.daily[5].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[5].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[6].weather[0].icon,
+          mintemp: responseHD.data.daily[6].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[6].temp.max - 273.15,
+        },
+        {
+          icon: responseHD.data.daily[7].weather[0].icon,
+          mintemp: responseHD.data.daily[7].temp.min - 273.15,
+          maxtemp: responseHD.data.daily[7].temp.max - 273.15,
+        },
+      ];
+      // console.log(forecastdata);
+      dispatch(registerForecast(forecastdata));
       if (response.data.total === 0) {
         window.alert("お探しの都市はありません");
       }

@@ -17,8 +17,6 @@ const Maps: React.FC = () => {
     lat: cityInfo.latitude,
     lng: cityInfo.longitude,
   };
-  console.log(cityInfo);
-  console.log(cityLatLng);
 
   return (
     <div className={styles.root}>
@@ -28,7 +26,7 @@ const Maps: React.FC = () => {
           <GoogleMapReact
             bootstrapURLKeys={{ key: REACT_APP_GOOGLEMAP_APIKEY }}
             defaultCenter={defaultLatLng}
-            defaultZoom={12}
+            defaultZoom={14}
             center={cityLatLng}
           />
         </div>
