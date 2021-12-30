@@ -15,7 +15,7 @@ const Forecast: React.FC = () => {
   const Forecast: any = useAppSelector(selectForecast);
   return (
     <div className={styles.root}>
-      <div className={styles.title}>一週間の予想天気</div>
+      <div className={styles.title}>1週間の予想天気</div>
       <div className={styles.wrapper}>
         <div className={styles.day}>{getday(0)}</div>
         <div className={styles.forecast}>

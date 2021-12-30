@@ -20,7 +20,7 @@ const Maps: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <div>Map</div>
+      {/* <div>Map</div> */}
       <div className={styles.map} id="map">
         <div style={{ height: "300px", width: "500px" }}>
           <GoogleMapReact

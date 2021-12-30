@@ -15,6 +15,7 @@ import {
   searchWeather,
   selectWeather,
   registerForecast,
+  registerAfterTemp,
 } from "../../app/taskSlice";
 
 const Search: React.FC = () => {
@@ -59,11 +60,7 @@ const Search: React.FC = () => {
       const responseHD = await axios.get(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude={hourly,daily}&appid=${ApiKey}`
       );
-      // console.log(responseHD);
-      // console.log(responseHD.data.daily);
-      // console.log(responseHD.data.daily[0].weather[0].icon);
-      // console.log(responseHD.data.daily[0].temp.min);
-      // console.log(responseHD.data.daily[0].temp.max);
+      console.log(responseHD);
       const forecastdata = [
         {
           icon: responseHD.data.daily[0].weather[0].icon,
@@ -106,8 +103,57 @@ const Search: React.FC = () => {
           maxtemp: responseHD.data.daily[7].temp.max - 273.15,
         },
       ];
-      // console.log(forecastdata);
       dispatch(registerForecast(forecastdata));
+      const gettime = (time: number) => {
+        const nowdate = new Date();
+        nowdate.setDate(nowdate.getHours() + time);
+        const afTime = nowdate.getHours() + time;
+        return String(afTime) + "時";
+      };
+      const afterTempData = [
+        {
+          time: gettime(0),
+          temp: Math.floor(responseHD.data.hourly[0].temp - 273.15),
+        },
+        {
+          time: gettime(1),
+          temp: Math.floor(responseHD.data.hourly[1].temp - 273.15),
+        },
+        {
+          time: gettime(2),
+          temp: Math.floor(responseHD.data.hourly[2].temp - 273.15),
+        },
+        {
+          time: gettime(3),
+          temp: Math.floor(responseHD.data.hourly[3].temp - 273.15),
+        },
+        {
+          time: gettime(4),
+          temp: Math.floor(responseHD.data.hourly[4].temp - 273.15),
+        },
+        {
+          time: gettime(5),
+          temp: Math.floor(responseHD.data.hourly[5].temp - 273.15),
+        },
+        {
+          time: gettime(6),
+          temp: Math.floor(responseHD.data.hourly[6].temp - 273.15),
+        },
+        {
+          time: gettime(7),
+          temp: Math.floor(responseHD.data.hourly[7].temp - 273.15),
+        },
+        {
+          time: gettime(8),
+          temp: Math.floor(responseHD.data.hourly[8].temp - 273.15),
+        },
+        {
+          time: gettime(9),
+          temp: Math.floor(responseHD.data.hourly[9].temp - 273.15),
+        },
+      ];
+      dispatch(registerAfterTemp(afterTempData));
+      console.log(afterTempData);
       if (response.data.total === 0) {
         window.alert("お探しの都市はありません");
       }
@@ -124,12 +170,18 @@ const Search: React.FC = () => {
         <div className={styles.form}>
           <div className={styles.form}>
             <input
+              className={styles.input}
               type="text"
               placeholder="検索する都市の名前"
               id="inputCity"
               // onInput={changeName}
             />
-            <input type="submit" value="検索" onClick={onSearchSubmit} />
+            <input
+              type="submit"
+              value="検索"
+              onClick={onSearchSubmit}
+              className={styles.btn}
+            />
             {/* <div>{datas}</div> */}
             {/* <div className={styles.SearchBox}>
               <Box
