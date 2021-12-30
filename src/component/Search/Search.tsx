@@ -21,20 +21,11 @@ import {
 const Search: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  // const City = "Tokyo";
-
-  // const params = {
-  //   appid: ApiKey,
-  //   q: City,
-  // };
-  // const Url = `http://api.openweathermap.org/data/2.5/forecast`;
-
   const onSearchSubmit = async () => {
     const inputElement: any = document.getElementById("inputCity");
     const inputCityName = inputElement ? inputElement.value : "";
     try {
-      const ApiKey = "3c05d3de91a0a2b64dd64cd68e18e38e";
-      // const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
+      const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
       const city = inputCityName;
       const response = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ja&appid=${ApiKey}`
@@ -174,7 +165,6 @@ const Search: React.FC = () => {
               type="text"
               placeholder="検索する都市の名前"
               id="inputCity"
-              // onInput={changeName}
             />
             <input
               type="submit"
@@ -182,30 +172,6 @@ const Search: React.FC = () => {
               onClick={onSearchSubmit}
               className={styles.btn}
             />
-            {/* <div>{datas}</div> */}
-            {/* <div className={styles.SearchBox}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1, width: "25ch" },
-                }}
-                noValidate
-                autoComplete="off"
-                onSubmit={onSearchSubmit}
-              >
-                <TextField
-                  id="outlined-basic"
-                  label="都市名を検索"
-                  variant="outlined"
-                  onSubmit={onSearchSubmit}
-                />
-              </Box>
-            </div>
-            <div className={styles.SearchBtn}>
-              <Stack spacing={2} direction="row" height="52px">
-                <Button variant="contained">検索</Button>
-              </Stack>
-            </div> */}
           </div>
         </div>
       </div>
