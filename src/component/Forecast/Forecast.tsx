@@ -5,15 +5,19 @@ import { selectForecast } from "../../app/taskSlice";
 import { style } from "@mui/system";
 
 const Forecast: React.FC = () => {
-  const now = new Date();
-  const month = now.getMonth() + 1;
-  const date = now.getDate();
+  const getday = (day: number) => {
+    const nowdate = new Date();
+    nowdate.setDate(nowdate.getDate() + day);
+    const afmonth = nowdate.getMonth() + 1;
+    const afday = nowdate.getDate();
+    return String(afmonth) + "月" + String(afday) + "日";
+  };
   const Forecast: any = useAppSelector(selectForecast);
   return (
     <div className={styles.root}>
       <div className={styles.title}>一週間の予想天気</div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date} 日 `}</div>
+        <div className={styles.day}>{getday(0)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -26,7 +30,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 1} 日 `}</div>
+        <div className={styles.day}>{getday(1)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -39,7 +43,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 2} 日 `}</div>
+        <div className={styles.day}>{getday(2)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -52,7 +56,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 3} 日 `}</div>
+        <div className={styles.day}>{getday(3)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -65,7 +69,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 4} 日 `}</div>
+        <div className={styles.day}>{getday(4)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -78,7 +82,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 5} 日 `}</div>
+        <div className={styles.day}>{getday(5)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -91,7 +95,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 6} 日 `}</div>
+        <div className={styles.day}>{getday(6)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
@@ -104,7 +108,7 @@ const Forecast: React.FC = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.day}>{` ${month} 月 ${date + 7} 日 `}</div>
+        <div className={styles.day}>{getday(7)}</div>
         <div className={styles.forecast}>
           <div className={styles.icon}>
             <img
