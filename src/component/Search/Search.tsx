@@ -8,7 +8,6 @@ import axios from "axios";
 import {
   registerCity,
   registerCityName,
-  selectCityName,
   searchWeather,
   selectWeather,
   registerForecast,
