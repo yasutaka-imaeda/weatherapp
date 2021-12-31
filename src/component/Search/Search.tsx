@@ -9,7 +9,6 @@ import {
   registerCity,
   registerCityName,
   searchWeather,
-  selectWeather,
   registerForecast,
   registerAfterTemp,
 } from "../../app/taskSlice";
