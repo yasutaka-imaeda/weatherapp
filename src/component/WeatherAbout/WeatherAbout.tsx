@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./WeatherAbout.module.scss";
 // import { useDispatch, useSelector } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import { selectCityName, selectCity, selectWeather } from "../../app/taskSlice";
 
 const WeatherAbout: React.FC = () => {
