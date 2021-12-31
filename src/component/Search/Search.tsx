@@ -22,7 +22,7 @@ const Search: React.FC = () => {
       const ApiKey = process.env.REACT_APP_WEATHER_APIKEY;
       const city = inputCityName;
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ja&appid=${ApiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ja&appid=${ApiKey}`
       );
       dispatch(registerCityName(response.data.name));
       const cityData = {
