@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import styles from "./Search.module.scss";
 import axios from "axios";
 import {
-  selectCity,
   registerCity,
   registerCityName,
   selectCityName,
